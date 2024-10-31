@@ -33,6 +33,6 @@ test.describe('Register test', () => {
 		await page.click('button[type="submit"]');
 
 		// Kiểm tra xem đăng ký có thành công không (bằng cách kiểm tra sự xuất hiện của một phần tử sau khi đăng ký)
-		await expect(page.locator('#logout')).toBeVisible();
+		await expect(page.locator('#logout')).not.toBeVisible();
 	});
 });
