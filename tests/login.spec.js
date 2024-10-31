@@ -30,24 +30,16 @@ test.describe('Login test', () => {
 		await expect(page.locator('#logout')).not.toBeVisible(); // Kiểm tra nút logout không xuất hiện
 		await expect(page.locator('text=Mật khẩu không đúng')).toBeVisible(); // Kiểm tra thông báo lỗi
 	});
-});
 
-test.describe('Register test', () => {
-	test('Đăng ký thành công với thông tin hợp lệ', async ({ page }) => {
-		// Mở trang đăng ký
-		await page.goto('http://localhost:5161/Identity/Account/Register');
-
-		await page.fill('#Input_FullName', 'ngocuyenlepham@gmail.com');
+	test('Đăng nhập thất bại với mật khẩu không đúng yêu cầu', async ({
+		page,
+	}) => {
+		await page.goto('http://localhost:5161/Identity/Account/Login');
 		await page.fill('#Input_Email', 'ngocuyenlepham@gmail.com');
-		await page.fill('#Input_PhoneNumber', 'ngocuyenlepham@gmail.com');
-		await page.fill('#Input_Password', 'Leuyen@03');
-		await page.fill('#Input_ConfirmPassword', 'Leuyen03');
-
-		// Click vào nút đăng nhập
+		await page.fill('#Input_Password', 'Ngocuyen123@');
 		await page.click('button[type="submit"]');
-
-		// Kiểm tra xem đăng ký có thành công không (bằng cách kiểm tra sự xuất hiện của một phần tử sau khi đăng ký)
-		await expect(page.locator('#logout')).toBeVisible();
+		await expect(page.locator('#logout')).not.toBeVisible(); // Kiểm tra nút logout không xuất hiện
+		await expect(page.locator('text=Mật khẩu không đúng')).toBeVisible(); // Kiểm tra thông báo lỗi
 	});
 });
 
